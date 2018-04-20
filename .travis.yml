@@ -1,0 +1,25 @@
+language: scala
+
+jdk: oraclejdk8
+
+scala:
+   - 2.10.4
+   - 2.12.4
+
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - REGISTRY_USER=maramabot
+    # REGISTRY_PASS=...
+    - secret: "<something long>"
+
+    
+script:
+  - sbt scripted
+  - docker build --tag myimage .
+  - docker run myimage
+
+after_script:
+  - docker images
