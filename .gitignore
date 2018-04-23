@@ -1,0 +1,32 @@
+# Scala
+target
+*.class
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea
+out
+
+# MacOS
+.DS_Store
+
+# https://gist.github.com/jadhavj/837c0071d4a791924b7e8512d316d748
+*.log
+.cache
+.history
+.lib
+dist
+bin
+libexec
+lib_managed
+src_managed
+project/boot
+project/plugins/project
+logs
+project/*-shim.sbt
+project/project
+project/target
+.scala_dependencies
+.worksheet
