@@ -7,7 +7,7 @@ os:
 install:
     - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
 script: 
-    - ./sbt "++$SCALA_VERSION" test
+    - ~/bin/sbt "++$SCALA_VERSION" test
 matrix:
     include:
         - os: linux
