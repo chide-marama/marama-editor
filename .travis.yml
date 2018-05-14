@@ -4,12 +4,17 @@ env:
     - SCALA_VERSION=2.12.4
 os: 
     -osx
-install: 
+install:
     - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
-
+script: 
+    - ./sbt "++$SCALA_VERSION" test
 matrix:
     include:
         - os: linux
           sudo: required
           jdk: oraclejdk8
-          scala:2.10.4
+          env: SCALA_VERSION= 2.10.4
+        - os: linux
+          sudo: required
+          jdk: oraclejdk8
+          env: SCALA_VERSION= 2.12.4
