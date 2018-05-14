@@ -1,10 +1,11 @@
-language: scala
-
-jdk: oraclejdk8
-env: - SCALA_VERSION=2.10.4 - SCALA_VERSION=2.12.4
-sudo: required
+language: java
+env: 
+    - SCALA_VERSION=2.10.4 
+    - SCALA_VERSION=2.12.4
+os: 
+    -osx
 install: 
-- curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
+    - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
 
 matrix:
     include:
