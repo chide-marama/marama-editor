@@ -5,7 +5,7 @@ env:
 os: 
     -osx
 install:
-    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; thencurl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt ; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt ; fi
 script: 
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ~/bin/sbt "++$SCALA_VERSION" test    ; fi
     - if [[ "$TRAVIS_OS_NAME" == "linux"    ]]; then sbt "++$SCALA_VERSION" test    ; fi
