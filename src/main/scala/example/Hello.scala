@@ -7,6 +7,10 @@ object Hello {
   def Hello() : String = {
     val Hello = "Hello"
     //Return isn't necessary.
-    Hello
+    if(true==true)
+      return Hello
+    else
+      return Hello
   }
+
 }
