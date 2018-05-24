@@ -8,5 +8,9 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "Hello",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies += scalaTest % Test,
+
+    mainClass in assembly := Some("example.Hello"),
+    assemblyJarName in assembly := "MaramaEditor.jar",
+    test in assembly := {}
   )
