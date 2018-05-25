@@ -19,7 +19,8 @@ lazy val root = (project in file(".")) // .enablePlugins(DockerPlugin)
 
     mainClass in assembly := Some("example.Hello"),
     assemblyJarName in assembly := "MaramaEditor.jar",
-    test in assembly := {}
+    test in assembly := {},
+    assemblyOption in assembly := (assemblyOption in assembly).value.copy(appendContentHash = true)
   )
 
 
