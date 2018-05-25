@@ -1,6 +1,7 @@
 # Scala
 target
 *.class
+src/main/resources
 
 # intellij
 *.iml
