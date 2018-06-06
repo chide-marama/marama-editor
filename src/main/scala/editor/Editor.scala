@@ -1,10 +1,11 @@
 package editor
 
 object Editor {
-  val d = new SecretMaramaLogic("example");
+  val d = new SecretMaramaLogic("example")
 
   def main(args: Array[String]): Unit = {
-    println(Hello() + " Marama!")
+    val loader = new MaramaficationLoader()
+    loader.readFile()
   }
 
   def Hello() : String = {

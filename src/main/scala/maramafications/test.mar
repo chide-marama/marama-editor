@@ -1,0 +1,54 @@
+[
+  {
+    "JointModels": [
+      {
+        "id": 1,
+        "name": "bool",
+        "male": "obj_file",
+        "female": "obj_file",
+        "scale_factor": 0
+      },
+      {
+        "id": 2,
+        "name": "list",
+        "male": "obj_file",
+        "female": "obj_file",
+        "scale_factor": 0.7
+      }
+    ]
+  },
+  {
+    "MaramaficationModels": [
+      {
+        "id": 1,
+        "name": "bool",
+        "obj_location": "obj_location",
+        "image_location": "image_location",
+        "joints": [
+          {
+            "joint_location": "x"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "list",
+        "obj_location": "obj_location",
+        "image_location": "image_location",
+        "type": "polymorphic",
+        "joints": [
+          {
+            "joint_location": "vector",
+            "direction_vector": "direction_vector"
+          },
+          {
+            "joint_location": "vector"
+          },
+          {
+            "joint_location": "vector"
+          }
+        ]
+      }
+    ]
+  }
+]
