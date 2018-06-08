@@ -1,5 +1,7 @@
 package maramafication
 
-case class Scene (_maramafications: List[MaramaficationModel]){
+import editor.MaramaficationLoader
+
+case class Scene (_maramaficationLoader: MaramaficationLoader){
 
 }

@@ -1,11 +1,14 @@
 package editor
 
+import maramafication.MaramaficationManager
+
 object Editor {
   val d = new SecretMaramaLogic("example")
 
   def main(args: Array[String]): Unit = {
     val loader = new MaramaficationLoader()
-    loader.readFile()
+    val manager = MaramaficationManager.getInstance()
+    loader.readFile(manager)
   }
 
   def Hello() : String = {
