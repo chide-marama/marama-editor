@@ -1,106 +1,102 @@
 {
   "MaramaficationModels": [
     {
-      "name": "bool",
-      "obj_location": "obj_location",
-      "image_location": "image_location",
-      "joint_models": [
+      "Name": "bool",
+      "ObjLocation": "ObjLocation",
+      "ImageLocation": "ImageLocation",
+      "JointShape":
         {
-          "id": 1,
-          "name": "bool",
-          "male": "obj_file",
-          "female": "obj_file",
-          "scale_factor": 0
+          "Argument": "obj_file",
+          "Result": "obj_file",
+          "ScalingFactor": 0
         },
+      "JointLocations": [
         {
-          "id": 2,
-          "name": "any",
-          "male": "obj_file",
-          "female": "obj_file",
-          "scale_factor": 0
-        }
-      ],
-      "joints": [
-        {
-          "model_id": 1,
-          "location_vector": {
+          "JointCenter": {
             "X": 4,
             "Y": 3,
             "Z": 1
           },
-          "direction_vector": {
-            "X": 1,
-            "Y": 1,
-            "Z": 1
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector":{
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
           }
         },
         {
-          "model_id": 2,
-          "location_vector": {
-            "X": 7,
-            "Y": 5,
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
             "Z": 1
           },
-          "direction_vector": {
-            "X": 1,
-            "Y": 6,
-            "Z": 0
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector":{
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
           }
         }
       ]
     },
     {
-      "name": "list",
-      "obj_location": "obj_location",
-      "image_location": "image_location",
-      "type": "polymorphic",
-      "joint_models": [
+      "Name": "list",
+      "ObjLocation": "ObjLocation",
+      "ImageLocation": "ImageLocation",
+      "Type": "polymorphic",
+      "JointShape": {
+        "Argument": "obj_file",
+        "Result": "obj_file",
+        "ScalingFactor": 0.7
+      },
+      "JointLocations": [
         {
-          "id": 1,
-          "name": "list",
-          "male": "obj_file",
-          "female": "obj_file",
-          "scale_factor": 0.7
-        }
-      ],
-      "joints": [
-        {
-          "model_id": 1,
-          "location_vector": {
+          "JointCenter": {
             "X": 4,
             "Y": 3,
             "Z": 1
           },
-          "direction_vector": {
-            "X": 1,
-            "Y": 1,
-            "Z": 1
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector":{
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
           }
         },
         {
-          "model_id": 1,
-          "location_vector": {
+          "JointCenter": {
             "X": 4,
             "Y": 3,
             "Z": 1
           },
-          "direction_vector": {
-            "X": 1,
-            "Y": 1,
-            "Z": 1
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector":{
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
           }
         },
         {
-          "model_id": 1,
-          "location_vector": {
+          "JointCenter": {
             "X": 4,
             "Y": 3,
             "Z": 1
           },
-          "direction_vector": {
-            "X": 1,
-            "Y": 1,
-            "Z": 1
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector":{
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
           }
         }
       ]
