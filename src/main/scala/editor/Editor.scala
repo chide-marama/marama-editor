@@ -9,6 +9,9 @@ object Editor {
     val loader = new MaramaficationLoader()
     val manager = MaramaficationManager.getInstance()
     loader.readFile(manager)
+    var maram = manager.getMaramaficationModelByName("bool")
+    println(maram._imgLocation)
+
   }
 
   def Hello() : String = {

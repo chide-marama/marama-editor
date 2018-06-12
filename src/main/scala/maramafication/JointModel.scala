@@ -1,6 +1,6 @@
 package maramafication
 
-case class JointModel (_name: String, _maleObj: String, _femaleObj: String, _scaleFactor: Int){
+case class JointModel (_localId: Int, _name: String, _maleObj: String, _femaleObj: String, _scaleFactor: Int){
   var staticId = 0
 
   var id: Int = getId

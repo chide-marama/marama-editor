@@ -4,10 +4,17 @@
       "name": "bool",
       "obj_location": "obj_location",
       "image_location": "image_location",
-      "JointModels": [
+      "joint_models": [
         {
-          "local_joint_id": 1,
+          "id": 1,
           "name": "bool",
+          "male": "obj_file",
+          "female": "obj_file",
+          "scale_factor": 0
+        },
+        {
+          "id": 2,
+          "name": "any",
           "male": "obj_file",
           "female": "obj_file",
           "scale_factor": 0
@@ -15,9 +22,30 @@
       ],
       "joints": [
         {
-          "joint_location": "vector",
-          "joint_type_id": 1,
-          "direction_vector": "direction_vector"
+          "model_id": 1,
+          "location_vector": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "direction_vector": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
+        },
+        {
+          "model_id": 2,
+          "location_vector": {
+            "X": 7,
+            "Y": 5,
+            "Z": 1
+          },
+          "direction_vector": {
+            "X": 1,
+            "Y": 6,
+            "Z": 0
+          }
         }
       ]
     },
@@ -28,7 +56,7 @@
       "type": "polymorphic",
       "joint_models": [
         {
-          "local_joint_id": 1,
+          "id": 1,
           "name": "list",
           "male": "obj_file",
           "female": "obj_file",
@@ -37,19 +65,43 @@
       ],
       "joints": [
         {
-          "joint_location": "vector",
-          "joint_type_id": 0,
-          "direction_vector": "direction_vector"
+          "model_id": 1,
+          "location_vector": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "direction_vector": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
         },
         {
-          "joint_location": "vector",
-          "joint_type_id": 1,
-          "direction_vector": "direction_vector"
+          "model_id": 1,
+          "location_vector": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "direction_vector": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
         },
         {
-          "joint_location": "vector",
-          "joint_type_id": 1,
-          "direction_vector": "direction_vector"
+          "model_id": 1,
+          "location_vector": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "direction_vector": {
+            "X": 1,
+            "Y": 1,
+            "Z": 1
+          }
         }
       ]
     }
