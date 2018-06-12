@@ -6,8 +6,7 @@ import util.Vector3
 
 import scala.io.Source
 
-class MaramaficationLoader {
-  val filename = "/src/main/scala/maramafications/test.mar"
+case class MaramaficationLoader(_fileName: String) {
 
   def readFile(maramaficationManager: MaramaficationManager): Unit = {
     // The jawn way of reading a json file.
@@ -101,7 +100,7 @@ class MaramaficationLoader {
     */
   def loadFile(): String = {
     var str: String = ""
-    for (line <- Source.fromFile(System.getProperty("user.dir") + filename).getLines) {
+    for (line <- Source.fromFile(System.getProperty("user.dir") + _fileName).getLines) {
       str += line
     }
     str
