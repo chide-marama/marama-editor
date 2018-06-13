@@ -9,5 +9,4 @@ import util.Vector3
   * https://drive.google.com/file/d/0BwvE2Xxofa7HUm5mTVZqRXhabGM/view?usp=sharing
   */
 case class Orientation(_angle: Double, _unitVector: Vector3) {
-
 }

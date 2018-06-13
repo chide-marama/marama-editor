@@ -9,14 +9,14 @@ package maramafication {
     }
 
     "A maramaficationLoader" should "get the correct amount of items from the .mar file." in {
-      val loader = MaramaficationLoader("/src/main/scala/maramafication_data/test.mar")
+      val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
       assert(manager.maramaficationModels.size == 2)
     }
 
     "A maramaficationLoader" should "load the correct data out of the .mar file." in {
-      val loader = MaramaficationLoader("/src/main/scala/maramafication_data/test.mar")
+      val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 
@@ -26,7 +26,7 @@ package maramafication {
       assert(manager.getMaramaficationModel(0)._imgLocation == "ImageLocation")
     }
     "A maramaficationLoader" should "load the correct amount of joints out of the .mar file." in {
-      val loader = MaramaficationLoader("/src/main/scala/maramafication_data/test.mar")
+      val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 
@@ -34,7 +34,7 @@ package maramafication {
       assert(manager.getMaramaficationModel(0)._jointLocations.length == 3)
     }
     "A maramaficationLoader" should "load the correct joint data out of the .mar file." in {
-      val loader = MaramaficationLoader("/src/main/scala/maramafication_data/test.mar")
+      val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 

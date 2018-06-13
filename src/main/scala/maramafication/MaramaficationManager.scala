@@ -27,6 +27,14 @@ class MaramaficationManager {
   }
 
   /**
+    * Removes all MaramaficationModels
+    */
+  def clear(): Unit ={
+    maramaficationModels = List[MaramaficationModel]()
+    names = List[(Int, String)]()
+  }
+
+  /**
     * Retrieve a MaramaficationModel by its ID in the list.
     */
   def getMaramaficationModel(index: Int): MaramaficationModel ={
