@@ -7,14 +7,12 @@ import maramafication.exceptions.{MaramaficationNotFoundException, MultipleMaram
   */
 class MaramaficationManager {
   var maramaficationModels: List[MaramaficationModel] = List[MaramaficationModel]()
-  var names: List[(Int, String)] = List[(Int, String)]()
 
   /**
     * Add a single maramafications model to the maramaficationModels list.
     * Also add its name to the names list.
     */
   def addMaramaficationModel(maramaficationModel: MaramaficationModel): Unit = {
-    names = (maramaficationModel._id: Int, maramaficationModel._name: String) :: names
     maramaficationModels = maramaficationModel :: maramaficationModels
   }
 
@@ -22,7 +20,6 @@ class MaramaficationManager {
     * Add a list of maramaficationmodels to the already tracked list.
     */
   def addMaramaficationModels(maramaficationModels: List[MaramaficationModel]): Unit = {
-    this.names = maramaficationModels.map(x => (x._id, x._name))
     this.maramaficationModels = maramaficationModels ::: this.maramaficationModels
   }
 
@@ -31,7 +28,6 @@ class MaramaficationManager {
     */
   def clear(): Unit = {
     maramaficationModels = List[MaramaficationModel]()
-    names = List[(Int, String)]()
   }
 
   /**
