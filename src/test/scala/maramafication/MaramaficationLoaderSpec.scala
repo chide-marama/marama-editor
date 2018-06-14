@@ -20,27 +20,27 @@ package maramafication {
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 
-      assert(manager.getMaramaficationModel(1)._name == "bool")
-      assert(manager.getMaramaficationModel(1)._name == "bool")
-      assert(manager.getMaramaficationModel(0)._objLocation == "ObjLocation")
-      assert(manager.getMaramaficationModel(0)._imgLocation == "ImageLocation")
+      assert(manager.getMaramaficationModel(0)._name == "bool")
+      assert(manager.getMaramaficationModel(0)._name == "bool")
+      assert(manager.getMaramaficationModel(1)._objLocation == "ObjLocation")
+      assert(manager.getMaramaficationModel(1)._imgLocation == "ImageLocation")
     }
     "A maramaficationLoader" should "load the correct amount of joints out of the .mar file." in {
       val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 
-      assert(manager.getMaramaficationModel(1)._jointLocations.length == 2)
-      assert(manager.getMaramaficationModel(0)._jointLocations.length == 3)
+      assert(manager.getMaramaficationModel(0)._jointLocations.length == 2)
+      assert(manager.getMaramaficationModel(1)._jointLocations.length == 3)
     }
     "A maramaficationLoader" should "load the correct joint data out of the .mar file." in {
       val loader = MaramaficationLoader("/src/test/scala/maramafication/test.mar")
       val manager = MaramaficationManager.getInstance()
       loader.readFile(manager)
 
-      assert(manager.getMaramaficationModel(1)._jointLocations(1)._orientation._unitVector.X == 8)
-      assert(manager.getMaramaficationModel(1)._jointLocations(1)._orientation._unitVector.Y == 1)
-      assert(manager.getMaramaficationModel(1)._jointLocations(1)._orientation._unitVector.Z == 1)
+      assert(manager.getMaramaficationModel(0)._jointLocations(1)._orientation._unitVector.X == 8)
+      assert(manager.getMaramaficationModel(0)._jointLocations(1)._orientation._unitVector.Y == 1)
+      assert(manager.getMaramaficationModel(0)._jointLocations(1)._orientation._unitVector.Z == 1)
     }
   }
 
