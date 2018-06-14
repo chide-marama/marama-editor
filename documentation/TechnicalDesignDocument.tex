@@ -1,0 +1,191 @@
+\documentclass[10pt]{extarticle} % article doctype, possible font size range from 8pt to 20pt with not all being avaiable.
+\setcounter{secnumdepth}{4} % Max. section depth, e.g. 3 means 4.1.1 is possible but not 4.1.1.2
+\title{\huge Technical Design Document MaramaUU Editor}
+\author{Tim Hintzbergen, Wilbert Schepenaar, Thijs van Dam, Erik van Lune    \\s1097561, s1094484, s1078671, s1095043 (respectively)
+\\\\ICTGPb
+\\Wilco Moerman}
+\date{May 15th, 2018}
+
+% include packages
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{mathabx}
+\usepackage{wrapfig}
+\usepackage[margin=1.0in]{geometry} % Sets page margin, 2.0in is default.
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+% custom commands
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\} % Without \mbox{} all newlines will be ignored, making the first sentence appear on the same line as a paragraph title.
+\newcommand{\code}[1]{\texttt{#1}} % monospace text for code examples.
+
+\DeclareCaptionFormat{cancaption}{#1#2#3\par} % Normal format actually
+\DeclareCaptionLabelFormat{cancaptionlabel}{#1}
+\captionsetup[figure][number]{format=cancaption,labelformat=cancaptionlabel}
+\graphicspath { {images/} }
+\begin{document}
+    \nocite{*}
+    \maketitle
+    \thispagestyle{empty}
+    \newpage
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Introduction
+    \newpage
+    \setcounter{page}{1}
+    \section {Introduction}
+    This document contains all technical aspects of the product regarding the Editor.
+    It describes the requirements, the architecture, the design choices and the epics.
+    The requirements talk about all functional and non-functional requirements of the product.
+    The architecture explains the form of the product, offers a clear overview and talks about some minute details.
+    The list of design choices illustrates and defend the various choices that have been made during the design and construction of the product.
+    Finally the epics list all coherent components of the product and their submodules
+    \newpage
+
+    \tableofcontents{}
+    \newpage
+
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Requirements
+    \section{Requirements}
+    Functional and Non-functional requirements.
+    \newpage
+
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Architecture
+    \section{Architecture}
+    WIP
+    \begin{itemize}
+        \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
+        \item Deployment diagrams to show the hardware and middleware on which the different software components run.
+        \item Database designs, such as ERD diagrams.
+        \item Descriptions of custom protocols, data formats etc.
+        \item Security measures and considerations.
+        \item Algorithm designs.
+    \end{itemize}
+
+    \subsection[class_diagram]{Class diagram}
+
+
+    \subsubsection{Maramafication Loader}
+    Underneath, the class diagram of the maramafication loader is shown.
+
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Marama-Editor}
+        \caption{Implementation of the maramafication loader and storing the maramafications}
+    \end{figure}
+    More information about the reasoning behind this particular structure is found inside the Design Choices\ref{sec:designchoices} section.
+    In this section the communication flow of the loader is explained.
+    This contains an explanation of how a JSON file gets parsed into a list of MaramaficationModels.
+
+    From the main thread the MaramaficationLoader will be created, passing through the file (.mar) that has to be read.
+    After that the \textit{readFile()} method is called.
+    This will respectively call the \textit{loadFile()} and the \textit{loadMaramafications()} methods.
+    A string is constructed first, which contains all the data of the file.
+    Implying this file meets the standards, there will be a list of MaramaficationModels in JSON format.
+    There will also be the JointLocations and a JointShape needed to construct these MaramaficationModels.
+    Then, the Jawn library is used to parse the string. Due to the file being a list of MaramaficationModels, a JArray will be passed through the \textit{loadMaramafications()} method.
+    \newpage
+    \begin{figure}[htb]
+        \center
+        \includegraphics[width=60mm, keepaspectratio]{pseudocode}
+        \caption{Pseudocode of the \textit{loadMaramafications()} method}
+    \end{figure}
+
+    The above pseudocode gives an idea of how the loadMaramafications method works.
+    The list of Maramafications will finally be loaded inside the MaramaficationManager and the job is done.
+    The MaramaficationManager being a singleton makes it accessible from the whole application, always being able to fetch the loaded MaramaficationModels.
+
+
+    \subsection{Project Structure}
+    Artifacts are built using sbt by passing the correct arguments, like so: \texttt{sbt assembly}.
+    Sbt also manages the dependencies of the project.
+    Next up is the documentation directory which, together with a local auxil directory make up our documentation, using \LaTeX\ of course.
+    Finally there are a couple of build and property files together with the gitignore file.
+
+    \newpage
+
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Design Choices
+    \section{Design Choices}
+    \label{sec:designchoices}
+
+    First a design has been made for the editor as a whole.
+    Note that this is loosely based on UML but does not follow a specific UML standard.
+    Furthermore it does not denote any concrete implementation.
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{architecture-marama-editor}
+        \caption{The overview diagram of the marama-editor, used as blueprint in the early stages of development}
+        \label{fig:ame}
+    \end{figure}
+    Figure \ref{fig:ame} shows the first prototype of the editor project.
+    The idea was that the marama-editor would be a stand-alone terminal based program.
+    This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
+    Now we encounter the entry point of the program.
+    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{}.
+    The fired action will then either load a .mar file with the \code{MaramaficationLoader}, adding it to the Scene via the \code{MaramaficationManager}.
+    The \code{MaramaficationLoader} parses .mar files to the internal structure of the \code{MaramficationModel} and the \code{JointModel}.
+    The \code{MaramaficationManager} manages all loaded \code{MaramficationModel} s and \code{JointModel} s.
+    The \code{Scene} tracks all instantiated \code{MaramficationModel} s and \code{JointModel} s.
+    All \code{Actions} should be logged, as this is a requirement from the product owner.
+    Other actions like clicking and selecting different maramafication in the view should be logged by the marama-editor.
+    Finally there is the \code{Validator} that validates if two \code{MaramaficationModels} are allowed to be joined.
+
+    Actions
+    \begin{description}
+        \item[get maram] text
+        \item[clear all] lorem ipsum
+    \end{description}
+
+    \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
+    \label{subsec:comchoice}
+    In the ideal situation the Editor would be a command line tool for the Marama project.
+    This way, it is easy to build a different, or more specialized view on top of the Editor.
+
+    \subsection{Epics}
+    \label{subsec:epics}
+    The editor is made up of different epics.\\
+    Epics are a collection of user stories that share a goal or functionality.
+
+    \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
+
+    \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
+    A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .maram files).
+    Since the transpiler isn't finished yet, all needed information could be made available.
+    This information should be based on the visupol.pdf\cite{visupol} paper.
+    Then also, the properties of the classes stored inside the Manager are based on the contents of this same paper.
+
+
+    - JSON rules
+    - JAWN
+
+
+    \newpage
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
+    \section{Continuous Intergration}
+    In this section build automation and its constituent components will be discussed.
+    How we applied it, the software used and the targets and platforms supported are among a few.
+
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- Continuing Development
+    \section{Continuing Development}
+    This section describes the plan on how to continue with development in the best way.
+    The team worked on quite some user stories from April 9th, to June 15th.
+    The following functionalities are most critical at the moment to start working on:
+    \subsection{Instantiating maramafications from a .mar file.}
+    A beginning is made at implementing the .mar file.
+    The .mar file is basically a json file with some agreements on structure.
+    The goal of the .mar file is to instantiate a maramafication when the file is loaded in.
+    This means that every value from the .mar file is evaluated and constructed into a usable maramafication model in the View.
+    This means that it will be placed in the maramafication list of the View.
+    \subsection{Communication from Editor to View}
+    The Editor must be able to send its state to the View so the View can visually represent that state.
+    This also requires some work inside the View to make this happen.
+    The reason behind this is to keep the Editor and View separated.
+    \subsection{Saving the state of the View inside the Editor}
+    The Editor needs to be able to know the state that the View is in.
+    This is because only the Editor is able to know whether a current marama is valid or invalid.
+    When something changes in the view, the Editor needs to be able to validate this change and change its state accordingly.
+
+    \newpage
+    %------------------------------------------------------------------------------------------------------------------------------------------------------- References
+    \bibliography{references}
+    \bibliographystyle{ieeetr}
+    % options: apalike for apa, ieeetr for ieee
+\end{document}
