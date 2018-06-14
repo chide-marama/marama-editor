@@ -105,7 +105,7 @@
 
     First a design has been made for the editor as a whole.
     Note that this is loosely based on UML but does not follow a specific UML standard.
-    Furthermore it does not denote any concrete implementation.
+    Furthermore it does not denote any concrete implementation.\\
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{architecture-marama-editor}
@@ -116,7 +116,7 @@
     The idea was that the marama-editor would be a stand-alone terminal based program.
     This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
     Now we encounter the entry point of the program.
-    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{}.
+    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{itm:actions}.
     The fired action will then either load a .mar file with the \code{MaramaficationLoader}, adding it to the Scene via the \code{MaramaficationManager}.
     The \code{MaramaficationLoader} parses .mar files to the internal structure of the \code{MaramficationModel} and the \code{JointModel}.
     The \code{MaramaficationManager} manages all loaded \code{MaramficationModel} s and \code{JointModel} s.
@@ -125,10 +125,24 @@
     Other actions like clicking and selecting different maramafication in the view should be logged by the marama-editor.
     Finally there is the \code{Validator} that validates if two \code{MaramaficationModels} are allowed to be joined.
 
-    Actions
+    The various actions are:
     \begin{description}
-        \item[get maram] text
-        \item[clear all] lorem ipsum
+        \label{itm:actions}
+        \item[Concrete actions]: actions that do modify the \code{Scene}
+        \begin{description}
+            \item[load] Loads a .mar file
+            \item[add] Adds a instance of a \code{MaramaficationModel} to the \code{Scene}
+            \item[join] Validate two \code{MaramaficationModel} instances
+            \item[log] Log another \code{Action}
+            \item[delete] Delete a \code{MaramaficationModel} instance from the \code{Scene}
+            \item[clear] Deletes all \code{MaramaficationModel} instances from the \code{Scene}
+        \end{description}
+        \item[User actions]: actions that do not modify the \code{Scene} and should only be logged
+        \begin{description}
+            \item[select from list] User selected a \code{MaramaficationModel} from the palette.
+            \item[select in scene] User selected an instantiated \code{MaramaficationModel}
+            \item[move maramafication] User moved a instantiated \code{MaramaficationModel}
+        \end{description}
     \end{description}
 
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
