@@ -6,6 +6,11 @@ import util.Vector3
 
 import scala.io.Source
 
+/**
+  * The class that loads maramafications, from a .mar file, into the maramaficationManager.
+  *
+  * @param _fileName The file, being inside the project files, that has to be loaded. This is related to the project root.
+  */
 case class MaramaficationLoader(_fileName: String) {
 
   def readFile(maramaficationManager: MaramaficationManager): Unit = {
@@ -97,6 +102,7 @@ case class MaramaficationLoader(_fileName: String) {
 
   /**
     * Read a JSON file and return the string containing all JSON data.
+    * Get the file from the project root to it's specific path.
     */
   def loadFile(): String = {
     var str: String = ""
