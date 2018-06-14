@@ -88,14 +88,18 @@
     Now we encounter the entry point of the program.
     First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{}.
     The fired action will then either load a .mar file with the \code{MaramaficationLoader}, adding it to the Scene via the \code{MaramaficationManager}.
-    The \code{MaramaficationLoader}
+    The \code{MaramaficationLoader} parses .mar files to the internal structure of the \code{MaramficationModel} and the \code{JointModel}.
+    The \code{MaramaficationManager} manages all loaded \code{MaramficationModel} s and \code{JointModel} s.
+    The \code{Scene} tracks all instantiated \code{MaramficationModel} s and \code{JointModel} s.
+    All \code{Actions} should be logged, as this is a requirement from the product owner.
+    Other actions like clicking and selecting different maramafication in the view should be logged by the marama-editor.
+    Finally there is the \code{Validator} that validates if two \code{MaramaficationModels} are allowed to be joined.
 
     Actions
     \begin{description}
         \item[get maram] text
         \item[clear all] lorem ipsum
     \end{description}
-
 
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
