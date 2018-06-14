@@ -81,7 +81,7 @@ package maramafication {
       maramaficationManager.clear()
     }
 
-    "The MaramaficationManager" should "be able to retrieve a MaramaficationModel from the MaramaficationModel list by its index." in {
+    "The MaramaficationManager" should "be able to retrieve a MaramaficationModel from the MaramaficationModel list by its id." in {
       val maramaficationManager = MaramaficationManager.getInstance()
 
       // Create a JointShape
