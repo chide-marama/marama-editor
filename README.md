@@ -7,8 +7,6 @@ This project is based on Scala and sbt. To start developing you can import the p
 ## Documentation
 
 It is recommended before you start development to read the technical design document that is provided in the source. 
-
-[TODO: describe how to build technical design document] 
   
 ## Building a .jar
 
