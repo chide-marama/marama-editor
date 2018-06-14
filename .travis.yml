@@ -1,9 +1,9 @@
-language: java
+language: scala
 env: 
     - SCALA_VERSION=2.10.4 
     - SCALA_VERSION=2.12.4
 os: 
-    -osx
+    -linux
 install:
     - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt 
 script: 
@@ -11,12 +11,12 @@ script:
           else ~/bin/sbt "++$SCALA_VERSION" test    ; fi
 matrix:
     include:
-        - os: linux
+        - os: osx
           language: scala
           sudo: required
           jdk: oraclejdk8
           scala: 2.10.4
-        - os: linux
+        - os: osx
           language: scala
           sudo: required
           jdk: oraclejdk8
