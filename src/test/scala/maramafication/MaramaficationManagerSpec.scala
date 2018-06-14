@@ -81,6 +81,33 @@ package maramafication {
       maramaficationManager.clear()
     }
 
+    "The MaramaficationManager" should "be able to throw an error if there is no maramafication with a certain id is found." in {
+      val maramaficationManager = MaramaficationManager.getInstance()
+
+      // Create a JointShape
+      val jointShape = JointShape("ResultObjectLocation", "ArgumentObjectLocation", 0.8)
+
+      // Create a JointLocation list
+      val orientation = Orientation(25, Vector3(3.0, 4.0, 5.0))
+      val jointCenter = Vector3(3.0, 4.0, 5.0)
+      val jointLocation = JointLocation(jointCenter, orientation)
+      val jointLocations = List[JointLocation](jointLocation)
+
+      // Create the maramafication
+      val maramafication = MaramaficationModel("TestMaramafication", "ObjectLocation", "ImgLocation", jointShape, jointLocations)
+      val maramaficationTwo = MaramaficationModel("TestMaramaficationTwo", "ObjectLocationTwo", "ImgLocationTwo", jointShape, jointLocations)
+
+      maramaficationManager.addMaramaficationModel(maramafication)
+      maramaficationManager.addMaramaficationModel(maramaficationTwo)
+
+      assertThrows[MaramaficationNotFoundException] {
+        val retrievedMaramafication = maramaficationManager.getMaramaficationModel(-1)
+      }
+
+      // Clear the MaramaficationManager
+      maramaficationManager.clear()
+    }
+
     "The MaramaficationManager" should "be able to retrieve a MaramaficationModel from the MaramaficationModel list by its id." in {
       val maramaficationManager = MaramaficationManager.getInstance()
 
