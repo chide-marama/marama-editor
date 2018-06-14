@@ -145,31 +145,10 @@
         \end{description}
     \end{description}
 
-    \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
-    \label{subsec:comchoice}
-    In the ideal situation the Editor would be a command line tool for the Marama project.
-    This way, it is easy to build a different, or more specialized view on top of the Editor.
-
-    \subsection{Epics}
-    \label{subsec:epics}
-    The editor is made up of different epics.\\
-    Epics are a collection of user stories that share a goal or functionality.
-
-    \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
-
-    \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
-
-
-
-    \subsection{Marama Logic}
-    This section will explain the way the marama logic has taken shape implemented in code.
-
-    \subsubsection{Structure}
-    Todo: add activity diagram from devlog
-    Todo: add activity diagram description
-
-    \subsubsection{Joints, Models and Instances}
+    \subsection{Joints, Models and Instances}
+    This section will explain the way the marama logic has taken shape implemented in code.\\
     \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+
     The image above is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
     A joint is a shape that can be attached to a single face of a model.
     Every joint has a unique type-id that is used as a reference to this joint.
@@ -183,6 +162,20 @@
     Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
     If this is the case, both instances will receive a reference to each other.
     This reference will tell whether the instances are connected or not.
+
+    \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
+    \label{subsec:comchoice}
+    In the ideal situation the Editor would be a command line tool for the Marama project.
+    This way, it is easy to build a different, or more specialized view on top of the Editor.
+
+    \subsection{Epics}
+    \label{subsec:epics}
+    The editor is made up of different epics.\\
+    Epics are a collection of user stories that share a goal or functionality.
+
+    \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
+
+    \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
