@@ -8,4 +8,3 @@ install:
     - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
 script:
     - sbt "++$SCALA_VERSION"
-          scala: 2.12.4
