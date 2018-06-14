@@ -103,15 +103,15 @@
     A joint is a shape that can be attached to a single face of a model.
     Every joint has a unique type-id that is used as a reference to this joint.
     When a joint is added to a model, this combination can be seen as an instance.
-    The joint will decide whether another maramafication/instance will fit on this model.
+    The joint will decide whether another instance will fit on this model.
 
-    When the user tries to build a marama (a combination of maramafications) the user will always try to fit instances together.
+    When the user tries to build a marama (a combination of instances) the user will always try to fit instances together.
     Every instance has a unique id, a number that is used as a reference to this instance.
     Besides the id, the instance also contains info about his faces and the possible joints that are attached.
-    When two maramafications are connected, two
-
-    ... joint decides....
-
+    When two instances are connected, the facing joints will be checked on whether they are allowed to fit.
+    Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
+    If this is the case, both instances will receive a reference to each other.
+    This reference will tell whether the instances are connected or not.
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
