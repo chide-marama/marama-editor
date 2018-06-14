@@ -1,5 +1,5 @@
 package maramafication
 
-case class Scene (_maramaficationLoader: MaramaficationLoader){
+case class Scene(_maramaficationLoader: MaramaficationLoader) {
 
 }

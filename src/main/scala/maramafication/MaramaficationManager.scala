@@ -13,7 +13,7 @@ class MaramaficationManager {
     * Add a single maramafications model to the maramaficationModels list.
     * Also add its name to the names list.
     */
-  def addMaramaficationModel(maramaficationModel: MaramaficationModel): Unit ={
+  def addMaramaficationModel(maramaficationModel: MaramaficationModel): Unit = {
     names = (maramaficationModel._id: Int, maramaficationModel._name: String) :: names
     maramaficationModels = maramaficationModel :: maramaficationModels
   }
@@ -21,7 +21,7 @@ class MaramaficationManager {
   /**
     * Add a list of maramaficationmodels to the already tracked list.
     */
-  def addMaramaficationModels(maramaficationModels: List[MaramaficationModel]): Unit ={
+  def addMaramaficationModels(maramaficationModels: List[MaramaficationModel]): Unit = {
     this.names = maramaficationModels.map(x => (x._id, x._name))
     this.maramaficationModels = maramaficationModels ::: this.maramaficationModels
   }
@@ -29,7 +29,7 @@ class MaramaficationManager {
   /**
     * Removes all MaramaficationModels
     */
-  def clear(): Unit ={
+  def clear(): Unit = {
     maramaficationModels = List[MaramaficationModel]()
     names = List[(Int, String)]()
   }
@@ -37,21 +37,21 @@ class MaramaficationManager {
   /**
     * Retrieve a MaramaficationModel by its ID in the list.
     */
-  def getMaramaficationModel(index: Int): MaramaficationModel ={
+  def getMaramaficationModel(index: Int): MaramaficationModel = {
     maramaficationModels(index)
   }
 
   /**
     * Retrieve a MaramaficationModel by its name.
     */
-  def getMaramaficationModelByName(name: String): MaramaficationModel ={
+  def getMaramaficationModelByName(name: String): MaramaficationModel = {
     var maramafications = maramaficationModels.filter(_._name == name)
 
-    if(maramafications.length < 1){
+    if (maramafications.length < 1) {
       throw MaramaficationNotFoundException()
     }
 
-    if(maramafications.length > 1){
+    if (maramafications.length > 1) {
       throw MultipleMaramaficationsFoundException()
     }
     maramafications.head
@@ -61,7 +61,7 @@ class MaramaficationManager {
 /**
   * Access the MaramaficationManager through the Singleton pattern.
   */
-object MaramaficationManager{
+object MaramaficationManager {
   private val _instance = new MaramaficationManager()
 
   def getInstance(): MaramaficationManager = {

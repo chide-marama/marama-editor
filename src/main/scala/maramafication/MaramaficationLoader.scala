@@ -43,7 +43,7 @@ case class MaramaficationLoader(_fileName: String) {
   /**
     * Extract the JValue and create a MaramaficationModel accordingly.
     */
-  def createMaramaficationModelFromJson(jsonMaramafication: JValue, jointShape: JointShape, jointList: List[JointLocation]): MaramaficationModel ={
+  def createMaramaficationModelFromJson(jsonMaramafication: JValue, jointShape: JointShape, jointList: List[JointLocation]): MaramaficationModel = {
     MaramaficationModel(
       jsonMaramafication.get("Name").asString,
       jsonMaramafication.get("ObjLocation").asString,
@@ -56,7 +56,7 @@ case class MaramaficationLoader(_fileName: String) {
   /**
     * Extract the JArray, containing JointLocations, and create a list of JointLocations accordingly.
     */
-  def createJointLocationListFromJson(jsonJointLocationList: JArray): List[JointLocation] ={
+  def createJointLocationListFromJson(jsonJointLocationList: JArray): List[JointLocation] = {
     var jointLocationList = List[JointLocation]()
 
     // Loop through the JArray and create a JointLocation for each item.
@@ -76,7 +76,7 @@ case class MaramaficationLoader(_fileName: String) {
   /**
     * Extract the JValue, containing a JointShape, and create the JointShape accordingly.
     */
-  def createJointShapeFromJson(jsonJointShape: JValue): JointShape ={
+  def createJointShapeFromJson(jsonJointShape: JValue): JointShape = {
     JointShape(
       jsonJointShape.get("Result").asString,
       jsonJointShape.get("Argument").asString,

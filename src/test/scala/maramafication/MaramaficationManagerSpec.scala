@@ -1,5 +1,5 @@
 import org.scalatest._
-package maramafication{
+package maramafication {
 
   import maramafication.exceptions.{MaramaficationNotFoundException, MultipleMaramaficationsFoundException}
   import maramafication.joint.{JointLocation, JointShape, Orientation}
@@ -146,7 +146,7 @@ package maramafication{
       val jointLocations = List[JointLocation](jointLocation)
 
       // Retrieve not existing maramafication
-      assertThrows[MaramaficationNotFoundException]{
+      assertThrows[MaramaficationNotFoundException] {
         val retrievedMaramafication = maramaficationManager.getMaramaficationModelByName("TestMaramafication")
       }
 
@@ -181,4 +181,5 @@ package maramafication{
       maramaficationManager.clear()
     }
   }
+
 }
