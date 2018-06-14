@@ -75,6 +75,7 @@
 
     First a design has been made for the editor as a whole.
     Note that this is loosely based on UML but does not follow a specific UML standard.
+    Furthermore it does not denote any concrete implementation.
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{architecture-marama-editor}
@@ -85,10 +86,12 @@
     The idea was that the marama-editor would be a stand-alone terminal based program.
     This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
     Now we encounter the entry point of the program.
-    First some parsing has to be done, it looks for legal commands and fires the appropriate action, see:\ref{}.
+    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{}.
+    The fired action will then either load a .mar file with the \code{MaramaficationLoader}, adding it to the Scene via the \code{MaramaficationManager}.
+    The \code{MaramaficationLoader}
 
+    Actions
     \begin{description}
-        Actions
         \item[get maram] text
         \item[clear all] lorem ipsum
     \end{description}
