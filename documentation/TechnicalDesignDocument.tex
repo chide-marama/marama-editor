@@ -163,6 +163,32 @@
     If this is the case, both instances will receive a reference to each other.
     This reference will tell whether the instances are connected or not.
 
+
+    \subsubsection{Marama Joints}
+    When working with multiple Marama objects, one of the most important things to do is keeping track of the places where they can be attached to other objects.
+    This information is required to fit multiple objects against one another, to know where to draw a newly created Marama, to be able to know which joint a user meant to interact with, etc.
+
+
+    The replacement thought up for this method is the following:
+    Every object gets its own array which contains the middle points of the various joint, listed with a vector3 from the object's centre.
+    These vectors could be rotated along with the object if need be.
+    If you take the above step of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collisionpoint against the origins of the faces.
+    The one closest to it should be the one the user wanted to interact with.
+
+    You need more information than this so the view can render it properly.
+    To properly render joints you need to know the direction the joints are facing.
+    After all, they should be able to slide into one another.
+    For this you can use another vector3, to determine the direction the joint should face.
+    This seemed to be the most elegant solution, so it is what the team settled on.
+
+    The final important thing about the joints is that the program, both the editor and the view, need to know what the contents are.
+    Several options were looked at, such as making each joint contain a shape, which could contain another shape, which could contain another, etcetera.
+    Copying all this over when using polymorphic objects seemed like it would get slow and messy, however.
+    Instead, the program looks at marama types.
+    If you look at the picture up top *TODO: ADD LINK* you can see how the various joints point at one another.
+    A circle joint points to a triangle joint which might contain all types of other things.
+    Another Marama could re-use that circle joint, or the triangle joint within, without having to copy everything over.
+
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
     In the ideal situation the Editor would be a command line tool for the Marama project.
