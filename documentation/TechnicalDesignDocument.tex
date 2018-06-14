@@ -73,7 +73,7 @@
     \section{Design Choices}
     \label{sec:designchoices}
 
-    First a design\ref{fig:ame} has been made for the editor as a whole.
+    First a design has been made for the editor as a whole.
     Note that this is loosely based on UML but does not follow a specific UML standard.
     \begin{figure}[htb]
         \centering
@@ -82,6 +82,16 @@
         \label{fig:ame}
     \end{figure}
     Figure \ref{fig:ame} shows the first prototype of the editor project.
+    The idea was that the marama-editor would be a stand-alone terminal based program.
+    This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
+    Now we encounter the entry point of the program.
+    First some parsing has to be done, it looks for legal commands and fires the appropriate action, see:\ref{}.
+
+    \begin{description}
+        Actions
+        \item[get maram] text
+        \item[clear all] lorem ipsum
+    \end{description}
 
 
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
