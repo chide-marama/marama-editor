@@ -8,14 +8,4 @@ install:
     - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
 script:
     - sbt "++$SCALA_VERSION"
-matrix:
-    include:
-        - os: osx
-          language: java
-          sudo: required
-          scala: 2.10.4
-        - os: osx
-          language: java
-          sudo: required
-          jdk: oraclejdk8
           scala: 2.12.4
