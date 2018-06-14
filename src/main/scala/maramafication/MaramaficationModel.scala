@@ -12,12 +12,10 @@ import maramafication.joint.{JointLocation, JointShape}
   * @param _jointLocations The location of the different joints
   */
 case class MaramaficationModel (var _name: String, var _objLocation: String, var _imgLocation: String, var _jointShape: JointShape, var _jointLocations: List[JointLocation]){
+  var _id : Int = MaramaficationModel.staticId
+  MaramaficationModel.staticId += 1
+}
+
+object MaramaficationModel {
   var staticId = 0
-
-  var _id: Int = getNewId
-
-  private def getNewId: Int ={
-    staticId += 1
-    staticId
-  }
 }

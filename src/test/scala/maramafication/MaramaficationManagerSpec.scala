@@ -100,7 +100,7 @@ package maramafication {
       maramaficationManager.addMaramaficationModel(maramafication)
       maramaficationManager.addMaramaficationModel(maramaficationTwo)
 
-      val retrievedMaramafication = maramaficationManager.getMaramaficationModel(1)
+      val retrievedMaramafication = maramaficationManager.getMaramaficationModel(maramafication._id)
 
       assert(retrievedMaramafication === maramafication)
 

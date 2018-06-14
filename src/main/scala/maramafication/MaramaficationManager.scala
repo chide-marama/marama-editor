@@ -37,8 +37,14 @@ class MaramaficationManager {
   /**
     * Retrieve a MaramaficationModel by its ID in the list.
     */
-  def getMaramaficationModel(index: Int): MaramaficationModel = {
-    maramaficationModels(index)
+  def getMaramaficationModel(id: Int): MaramaficationModel = {
+    var maramafications = maramaficationModels.filter(_._id == id)
+
+    if (maramafications.length < 1) {
+      throw MaramaficationNotFoundException()
+    }
+
+    maramafications.head
   }
 
   /**
