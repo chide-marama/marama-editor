@@ -17,6 +17,7 @@
 
 % custom commands
 \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\} % Without \mbox{} all newlines will be ignored, making the first sentence appear on the same line as a paragraph title.
+\newcommand{\code}[1]{\texttt{#1}} % monospace text for code examples.
 
 \DeclareCaptionFormat{cancaption}{#1#2#3\par} % Normal format actually
 \DeclareCaptionLabelFormat{cancaptionlabel}{#1}
@@ -71,6 +72,17 @@
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Design Choices
     \section{Design Choices}
     \label{sec:designchoices}
+
+    First a design\ref{fig:ame} has been made for the editor as a whole.
+    Note that this is loosely based on UML but does not follow a specific UML standard.
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{architecture-marama-editor}
+        \caption{This figure...}
+        \label{fig:ame}
+    \end{figure}
+    Figure \ref{fig:ame} shows the first prototype of the editor project.
+
 
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
