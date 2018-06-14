@@ -90,6 +90,29 @@
     \myparagraph{\href{\clickup{2e2c1}}{\#2e2c1} As a MGD or player I want to rotate the camera by one-fingered swiping}
     The camera rotation functionality is already implemented and enabled by libGDX on all supported devices (Desktop, Android).
 
+    \subsection{Marama Logic}
+    This section will explain the way the marama logic has taken shape implemented in code.
+
+    \subsubsection{Structure}
+    Todo: add activity diagram from devlog
+    Todo: add activity diagram description
+
+    \subsubsection{Joints, Models and Instances}
+    \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+    The image above is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
+    A joint is a shape that can be attached to a single face of a model.
+    Every joint has a unique type-id that is used as a reference to this joint.
+    When a joint is added to a model, this combination can be seen as an instance.
+    The joint will decide whether another maramafication/instance will fit on this model.
+
+    When the user tries to build a marama (a combination of maramafications) the user will always try to fit instances together.
+    Every instance has a unique id, a number that is used as a reference to this instance.
+    Besides the id, the instance also contains info about his faces and the possible joints that are attached.
+    When two maramafications are connected, two
+
+    ... joint decides....
+
+
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
     \section{Continous Intergration}
