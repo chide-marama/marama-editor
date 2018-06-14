@@ -1,23 +1,17 @@
-language: scala
-env: 
-    - SCALA_VERSION=2.10.4 
+language: java
+env:
+  - SCALA_VERSION=2.11.7
     - SCALA_VERSION=2.12.4
-os: 
-    -linux
-install:
-    - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt 
-script: 
-    - if [[ "$TRAVIS_OS_NAME" == "linux"    ]]; then sbt "++$SCALA_VERSION" test
-          else ~/bin/sbt "++$SCALA_VERSION" test    ; fi
+os:
+  - osx
+script:
+  - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
+  - ./sbt "++$SCALA_VERSION" test
 matrix:
-    include:
-        - os: osx
-          language: scala
-          sudo: required
-          jdk: oraclejdk8
-          scala: 2.10.4
-        - os: osx
-          language: scala
-          sudo: required
-          jdk: oraclejdk8
-          scala: 2.12.4
+  include:
+    - env: SCALA_VERSION=2.11.7
+      os: linux
+      jdk: oraclejdk7
+    - env: SCALA_VERSION=2.10.5
+      os: linux
+      jdk: oraclejdk8
