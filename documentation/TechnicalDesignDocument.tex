@@ -50,12 +50,12 @@
     \section{Architecture}
     WIP
     \begin{itemize}
-              \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
-              \item Deployment diagrams to show the hardware and middleware on which the different software components run.
-              \item Database designs, such as ERD diagrams.
-              \item Descriptions of custom protocols, data formats etc.
-              \item Security measures and considerations.
-              \item Algorithm designs.
+          \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
+          \item Deployment diagrams to show the hardware and middleware on which the different software components run.
+          \item Database designs, such as ERD diagrams.
+          \item Descriptions of custom protocols, data formats etc.
+          \item Security measures and considerations.
+          \item Algorithm designs.
     \end{itemize}
 
     \subsection[class_diagram]{Class diagram}
@@ -104,14 +104,13 @@
     \myparagraph{Instantiating maramafications from a .mar file.}
     A beginning is made at implementing the .mar file.
     The .mar file is basically a json file with some agreements on structure.
-    The goal of the .mar file is, whenever the file is loaded in, a maramafication is instantiated.
+    The goal of the .mar file is to instantiate a maramafication when the file is loaded in.
     This means that every value from the .mar file is evaluated and constructed into a usable maramafication model in the View.
     This means that it will be placed in the maramafication list of the View.
     \myparagraph{Communication from Editor to View}
     The Editor must be able to send its state to the View so the View can visually represent that state.
     This also requires some work inside the View to make this happen.
     The reason behind this is to keep the Editor and View separated.
-    This way the Editor and View have their own goal.
     \myparagraph{Saving the state of the View inside the Editor}
     The Editor needs to be able to know the state that the View is in.
     This is because only the Editor is able to know whether a current marama is valid or invalid.
