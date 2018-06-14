@@ -101,17 +101,17 @@
     This section describes the plan on how to continue with development in the best way.
     The team worked on quite some user stories from april 9th, to june 15th.
     The following functionalities are most critical at the moment to start working on:
-    \myparagraph{Instantiating maramafications from a .mar file.}
+    \subsection{Instantiating maramafications from a .mar file.}
     A beginning is made at implementing the .mar file.
     The .mar file is basically a json file with some agreements on structure.
     The goal of the .mar file is to instantiate a maramafication when the file is loaded in.
     This means that every value from the .mar file is evaluated and constructed into a usable maramafication model in the View.
     This means that it will be placed in the maramafication list of the View.
-    \myparagraph{Communication from Editor to View}
+    \subsection{Communication from Editor to View}
     The Editor must be able to send its state to the View so the View can visually represent that state.
     This also requires some work inside the View to make this happen.
     The reason behind this is to keep the Editor and View separated.
-    \myparagraph{Saving the state of the View inside the Editor}
+    \subsection{Saving the state of the View inside the Editor}
     The Editor needs to be able to know the state that the View is in.
     This is because only the Editor is able to know whether a current marama is valid or invalid.
     When something changes in the view, the Editor needs to be able to validate this change and change its state accordingly.
