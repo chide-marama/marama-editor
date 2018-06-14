@@ -43,4 +43,5 @@ package maramafication {
       assert(manager.getMaramaficationModel(1)._jointLocations(1)._orientation._unitVector.Z == 1)
     }
   }
+
 }
