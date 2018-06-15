@@ -4,7 +4,7 @@
 \author{Tim Hintzbergen, Wilbert Schepenaar, Thijs van Dam, Erik van Lune    \\s1097561, s1094484, s1078671, s1095043 (respectively)
 \\\\ICTGPb
 \\Wilco Moerman}
-\date{May 15th, 2018}
+\date{June 15th, 2018}
 
 % include packages
 \usepackage{graphicx}
@@ -45,40 +45,47 @@
 
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Requirements
     \section{Requirements}
-    Functional and Non-functional requirements.
+    Functional and Non-functional requirements that are associated with the editor.
+    \subsection{Functional Requirements:}
+    \begin{itemize}
+        \item The program should support loading different maramafications using the .mar files the marama-transpiler creates.
+        \item The program should validate if two maramafications are allowed to connect.
+        \item The program should provide a list of all possible maramafications to the View.
+        \item The program should save the current state of the current maramafications existing in the game world.
+        \item The program should support maramafications of polymorphic algebraic data structure.
+    \end{itemize}
+    \subsection{Non-Functional Requirements}
+    \begin{itemize}
+        \item The logic of the program should be written entirely in Scala.
+        \item The program should be made entirely open-source.
+        \item The program should be accessible on multiple platforms, mostly focusing on desktop and the Android platform.
+        \item A continuous integration system must be used to ensure that the program can properly build, and check that everyone's code is still running properly.
+        \item The program should be made as modular as possible, so the view can be separated from the logic and parts of the program are replaceable.
+    \end{itemize}
     \newpage
 
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Architecture
     \section{Architecture}
-    WIP
-    \begin{itemize}
-              \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
-              \item Deployment diagrams to show the hardware and middleware on which the different software components run.
-              \item Database designs, such as ERD diagrams.
-              \item Descriptions of custom protocols, data formats etc.
-              \item Security measures and considerations.
-              \item Algorithm designs.
-    \end{itemize}
-
-    \subsection[class_diagram]{Class diagram}
-
 
     \subsubsection{Maramafication Loader}
-    Underneath, the class diagram of the maramafication loader is shown.
+    Underneath (Fig. \ref{fig:me}), the class diagram of the maramafication loader is shown.
 
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Marama-Editor}
         \caption{Implementation of the maramafication loader and storing the maramafications}
+        \label{fig:me}
     \end{figure}
     More information about the reasoning behind this particular structure is found inside the Design Choices\ref{sec:designchoices} section.
-    In this section, the flow of the loader will be explained and how we end up with a list of MaramaficationModels.
+    In this section the communication flow of the loader is explained.
+    This contains an explanation of how a JSON file gets parsed into a list of MaramaficationModels.
 
-    From the main thread, the MaramaficationLoader will be created, passing through the file (.mar) that has to be read.
-    After that, the \textit{readFile()} method is called.
+    From the main thread the MaramaficationLoader will be created, passing through the file (.mar) that has to be read.
+    After that the \textit{readFile()} method is called.
     This will respectively call the \textit{loadFile()} and the \textit{loadMaramafications()} methods.
-    A string is constructed first, containing all the data of the file.
-    Implying this file meets the standards, there will be a list of MaramaficationModels, with JointLocations and JointShapes inside of them in JSON format.
+    A string is constructed first, which contains all the data of the file.
+    Implying this file meets the standards, there will be a list of MaramaficationModels in JSON format.
+    There will also be the JointLocations and a JointShape needed to construct these MaramaficationModels.
     Then, the Jawn library is used to parse the string. Due to the file being a list of MaramaficationModels, a JArray will be passed through the \textit{loadMaramafications()} method.
     \newpage
     \begin{figure}[htb]
@@ -112,7 +119,7 @@
         \caption{The overview diagram of the marama-editor, used as blueprint in the early stages of development}
         \label{fig:ame}
     \end{figure}
-    Figure\ref{fig:ame} shows the first prototype of the editor project.
+    Figure \ref{fig:ame} shows the first prototype of the editor project.
     The idea was that the marama-editor would be a stand-alone terminal based program.
     This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
     Now we encounter the entry point of the program.
@@ -146,6 +153,7 @@
     \end{description}
 
     \subsection{Joints, Models and Instances}
+    \label{sec:marama-storage}
     This section will explain the way the marama logic has taken shape implemented in code.\\
     \label{figModelInstance}\includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
 
@@ -158,11 +166,10 @@
     When the user tries to build a marama (a combination of instances) the user will always try to fit instances together.
     Every instance has a unique id, a number that is used as a reference to this instance.
     Besides the id, the instance also contains info about his faces and the possible joints that are attached.
-    When two instances are connected, the facing joints will be checked on whether they are allowed to fit.
+    When two instances are connected, the facing joints will be checked if they fit.
     Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
     If this is the case, both instances will receive a reference to each other.
-    This reference will tell whether the instances are connected or not.
-
+    This reference will tell whether the instances are connected or not, and to what.
 
     \subsubsection{Maramafication joints}
     When working with multiple maramafications, one of the most important things to do is keeping track of the places where they can be attached to other objects.
@@ -198,6 +205,7 @@
     A circle joint points to a triangle joint which might contain all types of other things.
     Another maramafication could re-use that circle joint, or the triangle joint within, without having to copy everything over.
 
+
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
     In the ideal situation the Editor would be a command line tool for the Marama project.
@@ -211,6 +219,10 @@
     \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
 
     \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
+    A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .maram files).
+    Since the transpiler isn't finished yet, all needed information could be made available.
+    This information should be based on the visupol.pdf\cite{visupol} paper.
+Then also, the properties of the classes stored inside the Manager are based on the contents of this same paper.
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
@@ -230,11 +242,11 @@
     There were a few problems with the setup, which will be detailed further below.
     The current implementation of Travis CI:
     \begin{itemize}
-                 \item-Sets up a container for the project to run.
-                 \item-Automatically builds the project
-                 \item-Runs through all unit tests
-                 \item-Allows live views and checks of the build.
-             \end{itemize}
+         \item-Sets up a container for the project to run.
+         \item-Automatically builds the project
+         \item-Runs through all unit tests
+         \item-Allows live views and checks of the build.
+    \end{itemize}
     This is currently always a Linux build, due to being unable to properly set up a Mac OS or Windows build.
     This ensures that all commits have been properly tested.
     Code review can be done without having to clone and test the code yourself.
