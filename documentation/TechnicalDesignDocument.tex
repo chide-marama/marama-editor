@@ -155,9 +155,15 @@
     \subsection{Joints, Models and Instances}
     \label{sec:marama-storage}
     This section will explain the way the marama logic has taken shape implemented in code.\\
-    \label{figModelInstance}\includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+        \caption{Marama joins, models and instances}
+        \label{fig:ModelInstance}
+    \end{figure}
 
-    The image above is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
+
+    The image above (Fig. \ref{fig:ModelInstance})is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
     A joint is a shape that can be attached to a single face of a model.
     Every joint has a unique type-id that is used as a reference to this joint.
     When a joint is added to a model, this combination can be seen as an instance.
