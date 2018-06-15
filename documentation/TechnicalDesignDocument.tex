@@ -66,26 +66,15 @@
 
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Architecture
     \section{Architecture}
-    WIP
-    \begin{itemize}
-        \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
-        \item Deployment diagrams to show the hardware and middleware on which the different software components run.
-        \item Database designs, such as ERD diagrams.
-        \item Descriptions of custom protocols, data formats etc.
-        \item Security measures and considerations.
-        \item Algorithm designs.
-    \end{itemize}
-
-    \subsection[class_diagram]{Class diagram}
-
 
     \subsubsection{Maramafication Loader}
-    Underneath, the class diagram of the maramafication loader is shown.
+    Underneath (Fig. \ref{fig:me}), the class diagram of the maramafication loader is shown.
 
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{Marama-Editor}
         \caption{Implementation of the maramafication loader and storing the maramafications}
+        \label{fig:me}
     \end{figure}
     More information about the reasoning behind this particular structure is found inside the Design Choices\ref{sec:designchoices} section.
     In this section the communication flow of the loader is explained.
@@ -166,9 +155,15 @@
     \subsection{Joints, Models and Instances}
     \label{sec:marama-storage}
     This section will explain the way the marama logic has taken shape implemented in code.\\
-    \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+        \caption{Marama joins, models and instances}
+        \label{fig:ModelInstance}
+    \end{figure}
 
-    The image above is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
+
+    The image above (Fig. \ref{fig:ModelInstance})is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
     A joint is a shape that can be attached to a single face of a model.
     Every joint has a unique type-id that is used as a reference to this joint.
     When a joint is added to a model, this combination can be seen as an instance.
@@ -181,6 +176,42 @@
     Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
     If this is the case, both instances will receive a reference to each other.
     This reference will tell whether the instances are connected or not, and to what.
+
+    \subsubsection{Maramafication joints}
+    When working with multiple maramafications, one of the most important things to do is keeping track of the places where they can be attached to other objects.
+    This information is required to fit multiple objects against one another, to know where to draw a newly created maramafication and to be able to know which joint a user meant to interact with, etc.
+
+    There is no really good existing way of determining which part of an object you're clicking on.
+    In libgdx you can create a bounding box for the object that will encapsulate the object and allow you to intersect rays with it from mouse movement.
+    This gives you the intersection point where your bounding box and mouse ray meets.
+
+    The original idea was to check this against the object's centroid, from which it spawns.
+    You could check the vector of the intersect point against the vector of its centroid.
+    If you look at the difference between those, for instance becoming a vector of (6, 9, 3) between the midpoint and the intersect point, you would be able to say that, because 9 is the largest difference, you must have touched the upper face.
+    Of course, after thinking about this a bit more, a few problems come to mind:
+    This technique only works for cubes and rectangles, and it would be a hassle to work with even something simple like an object not using all its faces.
+    Things like rotation would be quite difficult as well, since the bounding box doesn't rotate along with the object.
+
+    The replacement thought up for this method is the following:
+    Every object gets its own array which contains the centre points of the various joints, listed with as a 3D vector from the object's centre.
+    If you take the above step of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collision point against the origins of the faces.
+    The one closest to it should be the one the user wanted to interact with.
+
+    You need more information than this so the view can render it properly.
+    To properly render joints you need to know the direction the joints are facing.
+    After all, they should be able to slide into one another.
+    For this you can use another 3D vector, to determine the direction the joint should face.
+    This seemed to be the most elegant solution, so it is what the team settled on.
+
+    The final important thing about the joints is that the program, both the editor and the view, need to know what the contents are.
+    Several options were looked at, such as making each joint contain a shape, which could contain another shape, which could contain another, etcetera.
+    Copying all this when using polymorphic objects seemed like it would get slow and messy, however.
+    Instead, the program looks at the type of the maramafications.
+    If you look at the picture up top (\ref{figModelInstance}) you can see how the various joints point at one another.
+    A circle joint points to a triangle joint which might contain all types of other things.
+    Another maramafication could re-use that circle joint, or the triangle joint within, without having to copy everything over.
+
+
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
     In the ideal situation the Editor would be a command line tool for the Marama project.
@@ -193,7 +224,7 @@
 
     \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
 
-    \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
+    \subsubsection{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
     A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .mar files).
     Since the transpiler isn't finished yet, all needed information could be made available.
     This information should be based on the visupol.pdf\cite{visupol} paper.
@@ -257,11 +288,11 @@
     There were a few problems with the setup, which will be detailed further below.
     The current implementation of Travis CI:
     \begin{itemize}
-                 \item-Sets up a container for the project to run.
-                 \item-Automatically builds the project
-                 \item-Runs through all unit tests
-                 \item-Allows live views and checks of the build.
-             \end{itemize}
+         \item Sets up a container for the project to run.
+         \item Automatically builds the project
+         \item Runs through all unit tests
+         \item Allows live views and checks of the build.
+    \end{itemize}
     This is currently always a Linux build, due to being unable to properly set up a Mac OS or Windows build.
     This ensures that all commits have been properly tested.
     Code review can be done without having to clone and test the code yourself.
@@ -270,6 +301,7 @@
     Travis needs to be activated per repository.
     The team repository has it activated, but that permission won't come along when it is merged to the main branch.
     To activate this you will need to go to the travis website and allow them access to your GitHub account, then toggle the repositories you want it to review.
+
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Continuing Development
     \section{Continuing Development}
     This section describes the plan on how to continue with development in the best way.
