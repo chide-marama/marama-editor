@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{mathabx}
+\usepackage{subfig}
 \usepackage{wrapfig}
 \usepackage[margin=1.0in]{geometry} % Sets page margin, 2.0in is default.
 \usepackage{titlesec}
@@ -335,7 +336,30 @@
     This is more extensively explained in the design choices\cite{sec:marama-storage} section.
 
     \subsection{Different joint types}
-    // TODO: Describe the different joint types and what should be done accordingly
+    Different types of JointLocations aren't supported yet.
+    There is already thought of a possible solution, which is explained before\cite{sec:marama-storage}.
+    Some elaboration is that JointLocations (the concrete instances of joint models) should have a type.
+    There are four (known) forms these JointLocations can take.
+
+
+    \begin{figure}[htb]
+        \centering
+        \subfloat[const list]{{\includegraphics[width=5cm]{genders} }}
+        \qquad
+        \subfloat[bool]{{\includegraphics[width=5cm]{genders_2} }}
+        \caption{Different joint genders}
+        \label{fig:JointGenders}
+    \end{figure}
+
+    As can be seen on the const block, they could contain:
+    \begin{enumerate}
+        \item A shape, an ID to another instance, the argument 'gender'
+        \item A shape, an ID to another instance, the result 'gender'
+        \item An ID to another instance, the female 'gender'
+        \item An ID to another instance, the argument 'gender'
+    \end{enumerate}
+    This 'typing' of different joints hasn't been implemented yet.
+    Of course this could be done by creating four implementations of the JointLocation class.
 
 
     \newpage
