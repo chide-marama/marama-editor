@@ -48,19 +48,19 @@
     Functional and Non-functional requirements that are associated with the editor.
     \subsection{Functional Requirements:}
     \begin{itemize}
-        \item The program should support loading different maramaficataion shapes using the .mar files the Marama transpiler creates.
+        \item The program should support loading different maramafications using the .mar files the marama-transpiler creates.
         \item The program should validate if two maramafications are allowed to connect.
         \item The program should provide a list of all possible maramafications to the View.
         \item The program should save the current state of the current maramafications existing in the game world.
-        \item The program should support algebraic data structure Marama shapes.
-        \item The program should support polymorphic Marama shapes.
+        \item The program should support maramafications of polymorphic algebraic data structure.
     \end{itemize}
     \subsection{Non-Functional Requirements}
     \begin{itemize}
         \item The logic of the program should be written entirely in Scala.
         \item The program should be made entirely open-source.
         \item The program should be accessible on multiple platforms, mostly focusing on desktop and the Android platform.
-        \item A continuous integration system must be used to ensure that the program can properly build, even with multiple people working on it.
+        \item A continuous integration system must be used to ensure that the program can properly build, and check that everyone's code is still running properly.
+        \item The program should be made as modular as possible, so the view can be separated from the logic and parts of the program are replaceable.
     \end{itemize}
     \newpage
 
