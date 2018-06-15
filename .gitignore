@@ -1,6 +1,7 @@
 # Scala
 target
 *.class
+src/main/resources
 
 # intellij
 *.iml
@@ -30,3 +31,6 @@ project/project
 project/target
 .scala_dependencies
 .worksheet
+
+# latex
+auxil
