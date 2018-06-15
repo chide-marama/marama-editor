@@ -172,7 +172,6 @@
     In libgdx you can create a bounding box for the object that will encapsulate the object and allow you to intersect rays with it from mouse movement.
     This gives you the intersection point where your bounding box and mouse ray meets.
 
-
     The original idea was to check this against the object's centroid, from which it spawns.
     You could check the vector of the intersect point against the vector of its centroid.
     If you look at the difference between those, for instance becoming a vector of (6, 9, 3) between the midpoint and the intersect point, you would be able to say that, because 9 is the largest difference, you must have touched the upper face.
@@ -195,7 +194,7 @@
     Several options were looked at, such as making each joint contain a shape, which could contain another shape, which could contain another, etcetera.
     Copying all this when using polymorphic objects seemed like it would get slow and messy, however.
     Instead, the program looks at the type of the maramafications.
-    If you look at the picture up top\ref{figModelInstance} you can see how the various joints point at one another.
+    If you look at the picture up top (\ref{figModelInstance}) you can see how the various joints point at one another.
     A circle joint points to a triangle joint which might contain all types of other things.
     Another maramafication could re-use that circle joint, or the triangle joint within, without having to copy everything over.
 
