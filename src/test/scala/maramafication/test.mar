@@ -1,0 +1,104 @@
+{
+  "MaramaficationModels": [
+    {
+      "Name": "bool",
+      "ObjLocation": "ObjLocation",
+      "ImageLocation": "ImageLocation",
+      "JointShape": {
+        "Argument": "obj_file",
+        "Result": "obj_file",
+        "ScalingFactor": 0
+      },
+      "JointLocations": [
+        {
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector": {
+              "X": 8,
+              "Y": 1,
+              "Z": 1
+            }
+          }
+        },
+        {
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector": {
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "list",
+      "ObjLocation": "ObjLocation",
+      "ImageLocation": "ImageLocation",
+      "Type": "polymorphic",
+      "JointShape": {
+        "Argument": "obj_file",
+        "Result": "obj_file",
+        "ScalingFactor": 0.7
+      },
+      "JointLocations": [
+        {
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector": {
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
+          }
+        },
+        {
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector": {
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
+          }
+        },
+        {
+          "JointCenter": {
+            "X": 4,
+            "Y": 3,
+            "Z": 1
+          },
+          "Orientation": {
+            "Angle": 1,
+            "UnitVector": {
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

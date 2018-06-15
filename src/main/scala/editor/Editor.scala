@@ -1,18 +1,15 @@
 package editor
 
+import maramafication.{MaramaficationLoader, MaramaficationManager}
+
 object Editor {
-  val d = new SecretMaramaLogic("example");
-
   def main(args: Array[String]): Unit = {
-    println(Hello() + " Marama!")
-  }
+    val loader = MaramaficationLoader("/src/main/scala/maramafication_data/test.mar")
 
-  def Hello() : String = {
-    val Hello = "Hello"
-    Hello
-  }
+    // Load a .mar file
+    loader.readFile(MaramaficationManager.getInstance())
 
-  def doSecretMaramaLogic(): Unit = {
-    d.doLogic();
+    // Get a maramafication by it's name (specified inside the .mar)
+    var bool = MaramaficationManager.getInstance().getMaramaficationModelByName("bool")
   }
 }

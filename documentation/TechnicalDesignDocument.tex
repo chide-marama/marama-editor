@@ -68,12 +68,12 @@
     \section{Architecture}
     WIP
     \begin{itemize}
-              \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
-              \item Deployment diagrams to show the hardware and middleware on which the different software components run.
-              \item Database designs, such as ERD diagrams.
-              \item Descriptions of custom protocols, data formats etc.
-              \item Security measures and considerations.
-              \item Algorithm designs.
+        \item Sequence diagrams to show interactions between objects, if the interaction is particularly complex or involves many objects.
+        \item Deployment diagrams to show the hardware and middleware on which the different software components run.
+        \item Database designs, such as ERD diagrams.
+        \item Descriptions of custom protocols, data formats etc.
+        \item Security measures and considerations.
+        \item Algorithm designs.
     \end{itemize}
 
     \subsection[class_diagram]{Class diagram}
@@ -88,13 +88,15 @@
         \caption{Implementation of the maramafication loader and storing the maramafications}
     \end{figure}
     More information about the reasoning behind this particular structure is found inside the Design Choices\ref{sec:designchoices} section.
-    In this section, the flow of the loader will be explained and how we end up with a list of MaramaficationModels.
+    In this section the communication flow of the loader is explained.
+    This contains an explanation of how a JSON file gets parsed into a list of MaramaficationModels.
 
-    From the main thread, the MaramaficationLoader will be created, passing through the file (.mar) that has to be read.
-    After that, the \textit{readFile()} method is called.
+    From the main thread the MaramaficationLoader will be created, passing through the file (.mar) that has to be read.
+    After that the \textit{readFile()} method is called.
     This will respectively call the \textit{loadFile()} and the \textit{loadMaramafications()} methods.
-    A string is constructed first, containing all the data of the file.
-    Implying this file meets the standards, there will be a list of MaramaficationModels, with JointLocations and JointShapes inside of them in JSON format.
+    A string is constructed first, which contains all the data of the file.
+    Implying this file meets the standards, there will be a list of MaramaficationModels in JSON format.
+    There will also be the JointLocations and a JointShape needed to construct these MaramaficationModels.
     Then, the Jawn library is used to parse the string. Due to the file being a list of MaramaficationModels, a JArray will be passed through the \textit{loadMaramafications()} method.
     \newpage
     \begin{figure}[htb]
@@ -178,7 +180,6 @@
     Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
     If this is the case, both instances will receive a reference to each other.
     This reference will tell whether the instances are connected or not.
-
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
     In the ideal situation the Editor would be a command line tool for the Marama project.
@@ -192,6 +193,14 @@
     \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
 
     \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
+    A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .maram files).
+    Since the transpiler isn't finished yet, all needed information could be made available.
+    This information should be based on the visupol.pdf\cite{visupol} paper.
+    Then also, the properties of the classes stored inside the Manager are based on the contents of this same paper.
+
+
+    - JSON rules
+    - JAWN
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
@@ -224,7 +233,6 @@
     Travis needs to be activated per repository.
     The team repository has it activated, but that permission won't come along when it is merged to the main branch.
     To activate this you will need to go to the travis website and allow them access to your GitHub account, then toggle the repositories you want it to review.
-
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Continuing Development
     \section{Continuing Development}
     This section describes the plan on how to continue with development in the best way.
