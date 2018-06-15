@@ -169,7 +169,7 @@
     This information is required to fit multiple objects against one another, to know where to draw a newly created maramafication and to be able to know which joint a user meant to interact with, etc.
 
     The replacement thought up for this method is the following:
-    Every object gets its own array which contains the centre points of the various joints, listed with a 3D vector from the object's centre.
+    Every object gets its own array which contains the centre points of the various joints, listed with as a 3D vector from the object's centre.
     % T: Fix missing ref below
     If you take the above step\ref{} of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collision point against the origins of the faces.
     The one closest to it should be the one the user wanted to interact with.
