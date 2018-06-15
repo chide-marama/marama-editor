@@ -45,7 +45,23 @@
 
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Requirements
     \section{Requirements}
-    Functional and Non-functional requirements.
+    Functional and Non-functional requirements that are associated with the editor.
+    \subsection{Functional Requirements:}
+    \begin{itemize}
+        \item The program should support loading different maramaficataion shapes using the .mar files the Marama transpiler creates.
+        \item The program should validate if two maramafications are allowed to connect.
+        \item The program should provide a list of all possible maramafications to the View.
+        \item The program should save the current state of the current maramafications existing in the game world.
+        \item The program should support algebraic data structure Marama shapes.
+        \item The program should support polymorphic Marama shapes.
+    \end{itemize}
+    \subsection{Non-Functional Requirements}
+    \begin{itemize}
+        \item The logic of the program should be written entirely in Scala.
+        \item The program should be made entirely open-source.
+        \item The program should be accessible on multiple platforms, mostly focusing on desktop and the Android platform.
+        \item A continuous integration system must be used to ensure that the program can properly build, even with multiple people working on it.
+    \end{itemize}
     \newpage
 
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Architecture
@@ -93,7 +109,6 @@
     The list of Maramafications will finally be loaded inside the MaramaficationManager and the job is done.
     The MaramaficationManager being a singleton makes it accessible from the whole application, always being able to fetch the loaded MaramaficationModels.
 
-
     \subsection{Project Structure}
     Artifacts are built using sbt by passing the correct arguments, like so: \texttt{sbt assembly}.
     Sbt also manages the dependencies of the project.
@@ -108,7 +123,7 @@
 
     First a design has been made for the editor as a whole.
     Note that this is loosely based on UML but does not follow a specific UML standard.
-    Furthermore it does not denote any concrete implementation.
+    Furthermore it does not denote any concrete implementation.\\
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{architecture-marama-editor}
@@ -119,7 +134,7 @@
     The idea was that the marama-editor would be a stand-alone terminal based program.
     This way it is easy for a seperate GUI project to attach itself to the editor, redirecting input and visualizing the state of the marama-editor.
     Now we encounter the entry point of the program.
-    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{}.
+    First some parsing has to be done, it looks for legal commands and fires the appropriate action(s), see:\ref{itm:actions}.
     The fired action will then either load a .mar file with the \code{MaramaficationLoader}, adding it to the Scene via the \code{MaramaficationManager}.
     The \code{MaramaficationLoader} parses .mar files to the internal structure of the \code{MaramficationModel} and the \code{JointModel}.
     The \code{MaramaficationManager} manages all loaded \code{MaramficationModel} s and \code{JointModel} s.
@@ -128,12 +143,43 @@
     Other actions like clicking and selecting different maramafication in the view should be logged by the marama-editor.
     Finally there is the \code{Validator} that validates if two \code{MaramaficationModels} are allowed to be joined.
 
-    Actions
+    The various actions are:
     \begin{description}
-        \item[get maram] text
-        \item[clear all] lorem ipsum
+        \label{itm:actions}
+        \item[Concrete actions]: actions that do modify the \code{Scene}
+        \begin{description}
+            \item[load] Loads a .mar file
+            \item[add] Adds a instance of a \code{MaramaficationModel} to the \code{Scene}
+            \item[join] Validate two \code{MaramaficationModel} instances
+            \item[log] Log another \code{Action}
+            \item[delete] Delete a \code{MaramaficationModel} instance from the \code{Scene}
+            \item[clear] Deletes all \code{MaramaficationModel} instances from the \code{Scene}
+        \end{description}
+        \item[User actions]: actions that do not modify the \code{Scene} and should only be logged
+        \begin{description}
+            \item[select from list] User selected a \code{MaramaficationModel} from the palette.
+            \item[select in scene] User selected an instantiated \code{MaramaficationModel}
+            \item[move maramafication] User moved a instantiated \code{MaramaficationModel}
+        \end{description}
     \end{description}
 
+    \subsection{Joints, Models and Instances}
+    This section will explain the way the marama logic has taken shape implemented in code.\\
+    \includegraphics[width=1\linewidth]{marama-joins-models-instances.png}
+
+    The image above is divided in three parts: the joints (top-left), the models (bottom-left) and the instances (right).
+    A joint is a shape that can be attached to a single face of a model.
+    Every joint has a unique type-id that is used as a reference to this joint.
+    When a joint is added to a model, this combination can be seen as an instance.
+    The joint will decide whether another instance will fit on this model.
+
+    When the user tries to build a marama (a combination of instances) the user will always try to fit instances together.
+    Every instance has a unique id, a number that is used as a reference to this instance.
+    Besides the id, the instance also contains info about his faces and the possible joints that are attached.
+    When two instances are connected, the facing joints will be checked on whether they are allowed to fit.
+    Joints can connect if they are of the same type-id and when they differ in gender, either male or female.
+    If this is the case, both instances will receive a reference to each other.
+    This reference will tell whether the instances are connected or not.
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
     In the ideal situation the Editor would be a command line tool for the Marama project.
@@ -156,13 +202,37 @@
     - JSON rules
     - JAWN
 
-
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
-    \section{Continuous Intergration}
+    \section{Continous Integration}
     In this section build automation and its constituent components will be discussed.
     How we applied it, the software used and the targets and platforms supported are among a few.
 
+    The requirements for the project contain several important matters.
+    The project needs to be able to be developed and built from all OSes.
+    It needs to be able to switch hands between multiple developers easily, due to it being open source.
+    It should also obviously be thoroughly tested.
+    Because of this, the team, together with Chide decided that a continuous integration solution was necessary, and have been working on setting this up during the first part of the project.
+
+    The chosen CI system is Travis CI .
+    It is free for open source, and easy to use and learn.
+    After some research between multiple options the available documentation, resources, and functionality, such as the multi-os build options, made the team decide that Travis would be the best option.
+    There were a few problems with the setup, which will be detailed further below.
+    The current implementation of Travis CI:
+    \begin{itemize}
+                 \item-Sets up a container for the project to run.
+                 \item-Automatically builds the project
+                 \item-Runs through all unit tests
+                 \item-Allows live views and checks of the build.
+             \end{itemize}
+    This is currently always a Linux build, due to being unable to properly set up a Mac OS or Windows build.
+    This ensures that all commits have been properly tested.
+    Code review can be done without having to clone and test the code yourself.
+    +
+    \textbf{Notes on Travis setup:}
+    Travis needs to be activated per repository.
+    The team repository has it activated, but that permission won't come along when it is merged to the main branch.
+    To activate this you will need to go to the travis website and allow them access to your GitHub account, then toggle the repositories you want it to review.
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Continuing Development
     \section{Continuing Development}
     This section describes the plan on how to continue with development in the best way.
