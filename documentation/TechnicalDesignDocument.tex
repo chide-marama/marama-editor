@@ -170,22 +170,25 @@
 
     The replacement thought up for this method is the following:
     Every object gets its own array which contains the centre points of the various joints, listed with a 3D vector from the object's centre.
-    If you take the above step of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collisionpoint against the origins of the faces.
+    % T: Fix missing ref below
+    If you take the above step\ref{} of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collision point against the origins of the faces.
     The one closest to it should be the one the user wanted to interact with.
 
     You need more information than this so the view can render it properly.
     To properly render joints you need to know the direction the joints are facing.
     After all, they should be able to slide into one another.
-    For this you can use another vector3, to determine the direction the joint should face.
+    For this you can use another 3D vector, to determine the direction the joint should face.
+    % T: This solution was already in the visupol paper.
     This seemed to be the most elegant solution, so it is what the team settled on.
 
     The final important thing about the joints is that the program, both the editor and the view, need to know what the contents are.
     Several options were looked at, such as making each joint contain a shape, which could contain another shape, which could contain another, etcetera.
-    Copying all this over when using polymorphic objects seemed like it would get slow and messy, however.
-    Instead, the program looks at marama types.
+    Copying all this when using polymorphic objects seemed like it would get slow and messy, however.
+    Instead, the program looks at the type of the maramafications.
+    % T: You left a TODO open.
     If you look at the picture up top *TODO: ADD LINK* you can see how the various joints point at one another.
     A circle joint points to a triangle joint which might contain all types of other things.
-    Another Marama could re-use that circle joint, or the triangle joint within, without having to copy everything over.
+    Another maramafication could re-use that circle joint, or the triangle joint within, without having to copy everything over.
 
     \subsection[Communication MVA-MEA]{Receiving command or information from MVA and MEA}
     \label{subsec:comchoice}
