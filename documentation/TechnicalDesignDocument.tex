@@ -164,13 +164,12 @@
     This reference will tell whether the instances are connected or not.
 
 
-    \subsubsection{Marama Joints}
-    When working with multiple Marama objects, one of the most important things to do is keeping track of the places where they can be attached to other objects.
-    This information is required to fit multiple objects against one another, to know where to draw a newly created Marama, to be able to know which joint a user meant to interact with, etc.
-
+    \subsubsection{Maramafication joints}
+    When working with multiple maramafications, one of the most important things to do is keeping track of the places where they can be attached to other objects.
+    This information is required to fit multiple objects against one another, to know where to draw a newly created maramafication and to be able to know which joint a user meant to interact with, etc.
 
     The replacement thought up for this method is the following:
-    Every object gets its own array which contains the middle points of the various joint, listed with a vector3 from the object's centre.
+    Every object gets its own array which contains the centre points of the various joints, listed with a 3D vector from the object's centre.
     These vectors could be rotated along with the object if need be.
     If you take the above step of comparing the collision point of your mouse with the centre of your object, you would afterwards be able to check the dot product of your collisionpoint against the origins of the faces.
     The one closest to it should be the one the user wanted to interact with.
