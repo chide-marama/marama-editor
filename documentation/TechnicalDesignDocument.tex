@@ -225,10 +225,50 @@
     \newcommand{\clickup}[1]{https://app.clickup.com/757520/761304/t/#1}
 
     \myparagraph{\href{\clickup{2e28f}}{\#2e28f} As a MD I want my maramafications to be added to the list inside the Marama-editor (loading .obj files)}
-    A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .maram files).
+    A lot of the implementation of this user story depended on the data we received from the transpiler (a piece of code constructing the .mar files).
     Since the transpiler isn't finished yet, all needed information could be made available.
     This information should be based on the visupol.pdf\cite{visupol} paper.
-Then also, the properties of the classes stored inside the Manager are based on the contents of this same paper.
+    Then of course, the properties of the classes stored inside the MaramaficationManager are based on the contents of this same paper as well.
+
+    A .mar file is constructed according to the specifications of this paper.
+    This file is used for testing purposes, and the code of the MaramaficationLoader is built around it.
+    The loaders expects the file to meet the following requirements:
+
+    \begin{description}
+        \item[MaramaficationModels] A list of MaramaficationModels
+        \begin{description}
+            \item[Name] Textual identification
+            \item[ObjLocation] 3D object location
+            \item[ImageLocation] Preview image location
+            \item[JointShape] Maramafication specific joint shape
+            \begin{description}
+                \item[Argument] Argument 3D object location
+                \item[Result] Result 3D object location
+                \item[ScalingFactor] Factor for object scaling
+            \end{description}
+            \item[JointLocations] List of all JointLocations
+            \begin{description}
+                \item[JointCenter] Vector3 defining the position of the joint
+                \begin{description}
+                    \item[X, Y, Z]
+                \end{description}
+                \item[Orientation] Direction the joint is facing
+                \begin{description}
+                    \item[Angle] Rotation of the joint
+                    \item[UnitVector] Vector3 defining the direction
+                    \begin{description}
+                        \item[X, Y, Z]
+                    \end{description}
+                \end{description}
+            \end{description}
+        \end{description}
+        \item
+    \end{description}
+
+    The received JSON is getting parsed.
+    To do this we chose the \href{https://github.com/non/jawn}{Jawn library}.
+    Scala doesn't support JSON parsing natively, which forced to use a library.
+    The chosen library is Jawn, it gets the job done without being overly complicated.
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- Build Automation
@@ -267,20 +307,36 @@ Then also, the properties of the classes stored inside the Manager are based on 
     This section describes the plan on how to continue with development in the best way.
     The team worked on quite some user stories from April 9th, to June 15th.
     The following functionalities are most critical at the moment to start working on:
+
     \subsection{Instantiating maramafications from a .mar file.}
     A beginning is made at implementing the .mar file.
-    The .mar file is basically a json file with some agreements on structure.
-    The goal of the .mar file is to instantiate a maramafication when the file is loaded in.
-    This means that every value from the .mar file is evaluated and constructed into a usable maramafication model in the View.
+    The .mar file is, as earlier explained, basically a json file with some agreements on structure.
+    The goal of the .mar file is contain data for Maramafications and all that is needed to instantiate one.
+    This means that every value from the .mar file is evaluated and constructed into a maramafication model, which is usable in the View.
     This means that it will be placed in the maramafication list of the View.
+
+    \subsection{Consistency according to Visupol}
+    Also earlier defined, most of the development is structured according to the visupol\cite{visupol} document.
+    However, not everything is consistent yet, and it's advised to first read this article before further developing.
+    The inconsistency is explainable by the complexity and the extensiveness of this document.
+    It contains the entire concept of Maramafication, including the marama-editor and the marama-view logic, worked out to its full potential.
+    Therefore, use this document as a guideline when developing.
+    During the developing of the application to its current state, a lot of problems could've been both more quickly and more easily solved if we consulted the visupol article.
+
     \subsection{Communication from Editor to View}
     The Editor must be able to send its state to the View so the View can visually represent that state.
     This also requires some work inside the View to make this happen.
     The reason behind this is to keep the Editor and View separated.
+
     \subsection{Saving the state of the View inside the Editor}
     The Editor needs to be able to know the state that the View is in.
     This is because only the Editor is able to know whether a current marama is valid or invalid.
     When something changes in the view, the Editor needs to be able to validate this change and change its state accordingly.
+    This is more extensively explained in the design choices\cite{sec:marama-storage} section.
+
+    \subsection{Different joint types}
+    // TODO: Describe the different joint types and what should be done accordingly
+
 
     \newpage
     %------------------------------------------------------------------------------------------------------------------------------------------------------- References
