@@ -1,0 +1,10 @@
+language: scala
+env:
+    - SCALA_VERSION=2.10.4
+    - SCALA_VERSION=2.12.4
+os:
+    -linux
+install:
+    - curl -Ls https://git.io/sbt > ~/bin/sbt && chmod 0755 ~/bin/sbt
+script:
+    - sbt "++$SCALA_VERSION"
